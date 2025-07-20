@@ -1,4 +1,5 @@
-# ALX React App – Task 0
+# ALX React App
+This project was bootstrapped using Vite.
 
 This project was created as part of the ALX Front-End specialization to explore the fundamentals of React using Vite.
 
