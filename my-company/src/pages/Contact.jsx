@@ -1,52 +1,71 @@
-import { useState } from 'react';
+import React, { useState } from "react";
 
-function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+const Contact = () => {
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert('Form submitted!');
+    console.log("Form submitted!");
+    setSubmitted(true);
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h1>Contact Us</h1>
-      <form onSubmit={handleSubmit}>
+    <div style={{ padding: "20px" }}>
+      <h1 style={{ textAlign: "center" }}>Contact Us</h1>
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          maxWidth: "400px",
+          margin: "0 auto",
+          gap: "10px",
+        }}
+      >
         <input
-          type="text"
+          id="name"
           name="name"
+          type="text"
           placeholder="Your Name"
-          value={formData.name}
-          onChange={handleChange}
-          style={{ display: 'block', margin: '10px 0' }}
+          required
+          style={{ padding: "10px", border: "1px solid #ccc" }}
         />
         <input
-          type="email"
+          id="email"
           name="email"
+          type="email"
           placeholder="Your Email"
-          value={formData.email}
-          onChange={handleChange}
-          style={{ display: 'block', margin: '10px 0' }}
+          required
+          style={{ padding: "10px", border: "1px solid #ccc" }}
         />
         <textarea
+          id="message"
           name="message"
           placeholder="Your Message"
-          value={formData.message}
-          onChange={handleChange}
-          style={{ display: 'block', margin: '10px 0' }}
-        />
-        <button type="submit">Send Message</button>
+          required
+          style={{ padding: "10px", border: "1px solid #ccc", height: "100px" }}
+        ></textarea>
+        <button
+          type="submit"
+          style={{
+            padding: "10px",
+            backgroundColor: "blue",
+            color: "white",
+            border: "none",
+            cursor: "pointer",
+          }}
+        >
+          Send
+        </button>
       </form>
+
+      {submitted && (
+        <p style={{ textAlign: "center", marginTop: "20px", color: "green" }}>
+          Message sent successfully!
+        </p>
+      )}
     </div>
   );
-}
+};
 
 export default Contact;
