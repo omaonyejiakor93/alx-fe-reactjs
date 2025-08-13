@@ -1,40 +1,41 @@
 // src/App.jsx
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import AddRecipeForm from "./components/AddRecipeForm";
 import RecipeList from "./components/RecipeList";
 import RecipeDetails from "./components/RecipeDetails";
+import SearchBar from "./components/SearchBar";
 
 function App() {
   return (
-    <Router>
-      <div>
-        <nav>
-          <Link to="/">Home</Link> |{" "}
-          <Link to="/recipes">Recipes</Link>
-        </nav>
+    <div>
+      <nav>
+        <Link to="/">Home</Link> |{" "}
+        <Link to="/recipes">Recipes</Link>
+      </nav>
 
-        <Routes>
-          {/* Home route */}
-          <Route
-            path="/"
-            element={
-              <div>
-                <h1>My Recipe App</h1>
-                <AddRecipeForm />
-                <RecipeList />
-              </div>
-            }
-          />
+      <SearchBar /> {/* 🔹 For filtering */}
 
-          {/* Recipes list route */}
-          <Route path="/recipes" element={<RecipeList />} />
+      <Routes>
+        {/* Home route */}
+        <Route
+          path="/"
+          element={
+            <div>
+              <h1>My Recipe App</h1>
+              <AddRecipeForm />
+              <RecipeList />
+            </div>
+          }
+        />
 
-          {/* Recipe details route */}
-          <Route path="/recipes/:id" element={<RecipeDetails />} />
-        </Routes>
-      </div>
-    </Router>
+        {/* Recipes list route */}
+        <Route path="/recipes" element={<RecipeList />} />
+
+        {/* Recipe details route */}
+        <Route path="/recipes/:id" element={<RecipeDetails />} />
+      </Routes>
+    </div>
   );
 }
 
