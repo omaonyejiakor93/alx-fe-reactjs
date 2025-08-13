@@ -1,16 +1,14 @@
-// src/components/RecipeList.jsx
+import React from 'react';
 import useRecipeStore from '../store/RecipeStore';
 
-function RecipeList() {
+export default function RecipeList() {
   const recipes = useRecipeStore((state) => state.recipes);
 
   return (
     <ul>
-      {recipes.map((recipe, index) => (
-        <li key={index}>{recipe.title}</li>
+      {recipes.map((r, i) => (
+        <li key={i}>{r.title}</li>
       ))}
     </ul>
   );
 }
-
-export default RecipeList;

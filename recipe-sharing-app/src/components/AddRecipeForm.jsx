@@ -1,15 +1,14 @@
-// src/components/RecipeForm.jsx
-import { useState } from 'react';
+import React, { useState } from 'react';
 import useRecipeStore from '../store/RecipeStore';
 
-function RecipeForm() {
-  const [title, setTitle] = useState('');
+export default function AddRecipeForm() {
   const addRecipe = useRecipeStore((state) => state.addRecipe);
+  const [title, setTitle] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (title.trim() === '') return;
-    addRecipe({ title });
+    if (!title.trim()) return;
+    addRecipe({ title: title.trim() });
     setTitle('');
   };
 
@@ -17,7 +16,7 @@ function RecipeForm() {
     <form onSubmit={handleSubmit}>
       <input
         type="text"
-        placeholder="Enter recipe title"
+        placeholder="Title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
@@ -25,5 +24,3 @@ function RecipeForm() {
     </form>
   );
 }
-
-export default RecipeForm;
