@@ -1,7 +1,7 @@
-import React from 'react';
-import AddRecipeForm from './components/AddRecipeForm';
 import RecipeList from './components/RecipeList';
-export default function App() {
+import AddRecipeForm from './components/AddRecipeForm';
+
+function App() {
   return (
     <div>
       <h1>Recipe Sharing App</h1>
@@ -9,4 +9,6 @@ export default function App() {
       <RecipeList />
     </div>
   );
-} 
+}
+
+export default App;

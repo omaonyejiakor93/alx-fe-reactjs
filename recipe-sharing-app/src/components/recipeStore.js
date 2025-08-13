@@ -1,11 +1,8 @@
 import { create } from 'zustand';
 
-// Create a Zustand store for recipes
-const useRecipeStore = create((set) => ({
+export const useRecipeStore = create((set) => ({
   recipes: [],
-
-  // Function to update the recipes array
-  setRecipes: (newRecipes) => set({ recipes: newRecipes }),
+  addRecipe: (newRecipe) =>
+    set((state) => ({ recipes: [...state.recipes, newRecipe] })),
+  setRecipes: (recipes) => set({ recipes }),
 }));
-
-export default useRecipeStore;
