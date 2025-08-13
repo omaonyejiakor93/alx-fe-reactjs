@@ -1,40 +1,36 @@
 // src/App.jsx
 import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
 import AddRecipeForm from "./components/AddRecipeForm";
+import EditRecipeForm from "./components/EditRecipeForm";
+import DeleteRecipeButton from "./components/DeleteRecipeButton";
 import RecipeList from "./components/RecipeList";
-import RecipeDetails from "./components/RecipeDetails";
 import SearchBar from "./components/SearchBar";
+import FavoritesList from "./components/FavoritesList";
+import RecommendationsList from "./components/RecommendationsList";
+import { useRecipeStore } from "./components/recipeStore";
 
 function App() {
+  const recipes = useRecipeStore((state) => state.recipes);
+
   return (
-    <div>
-      <nav>
-        <Link to="/">Home</Link> |{" "}
-        <Link to="/recipes">Recipes</Link>
-      </nav>
+    <div style={{ padding: "20px" }}>
+      <h1>Recipe Sharing App</h1>
 
-      <SearchBar /> {/* 🔹 For filtering */}
+      {/* Search */}
+      <SearchBar />
 
-      <Routes>
-        {/* Home route */}
-        <Route
-          path="/"
-          element={
-            <div>
-              <h1>My Recipe App</h1>
-              <AddRecipeForm />
-              <RecipeList />
-            </div>
-          }
-        />
+      {/* Add Recipe */}
+      <AddRecipeForm />
 
-        {/* Recipes list route */}
-        <Route path="/recipes" element={<RecipeList />} />
+      {/* Recipe List */}
+      <h2>All Recipes</h2>
+      <RecipeList recipes={recipes} />
 
-        {/* Recipe details route */}
-        <Route path="/recipes/:id" element={<RecipeDetails />} />
-      </Routes>
+      {/* Favorites */}
+      <FavoritesList />
+
+      {/* Recommendations */}
+      <RecommendationsList />
     </div>
   );
 }
