@@ -9,8 +9,10 @@ function App() {
   return (
     <div>
       <nav>
-        <Link to="/">Home</Link> |{" "}
-        <Link to="/recipes">Recipes</Link>
+        <Link to="/">Home</Link>
+        <Link to="/recipes" style={{ marginLeft: "10px" }}>
+          Recipes
+        </Link>
       </nav>
 
       <Routes>

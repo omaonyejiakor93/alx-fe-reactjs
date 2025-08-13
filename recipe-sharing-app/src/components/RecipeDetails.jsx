@@ -3,12 +3,12 @@ import { useRecipeStore } from './recipeStore';
 import EditRecipeForm from './EditRecipeForm';
 import DeleteRecipeButton from './DeleteRecipeButton';
 
-const RecipeDetails = ({ recipeId }) => {
-  const params = useParams();
-  const id = recipeId ?? Number(params.id);
+const RecipeDetails = () => {
+  const { id } = useParams(); // always get from route params
+  const recipeId = Number(id);
 
   const recipe = useRecipeStore((state) =>
-    state.recipes.find((r) => r.id === id)
+    state.recipes.find((r) => r.id === recipeId)
   );
 
   if (!recipe) return <p>Recipe not found.</p>;
@@ -20,7 +20,7 @@ const RecipeDetails = ({ recipeId }) => {
 
       {/* Edit & Delete controls */}
       <EditRecipeForm recipe={recipe} />
-      <DeleteRecipeButton id={id} />
+      <DeleteRecipeButton id={recipeId} />
     </div>
   );
 };
