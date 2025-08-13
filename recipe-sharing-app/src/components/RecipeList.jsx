@@ -1,5 +1,5 @@
 import React from 'react';
-import useRecipeStore from './recipeStore';
+import useRecipeStore from './tempStore';
 
 export default function RecipeList() {
   const recipes = useRecipeStore((state) => state.recipes);
