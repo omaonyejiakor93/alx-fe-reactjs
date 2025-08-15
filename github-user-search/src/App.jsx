@@ -1,5 +1,5 @@
 import React from 'react';
-import Search from './components/gutsearch.jsx';
+import Search from './components/search.jsx';
 
 const App = () => {
   return (
