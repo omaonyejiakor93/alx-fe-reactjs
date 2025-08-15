@@ -1,12 +1,13 @@
-import React from "react";
-import Search from "./components/search.jsx";
+import React from 'react';
+import Search from './components/search.jsx';
 
-function App() {
+const App = () => {
   return (
-    <div>
+    <div style={{ fontFamily: 'Arial, sans-serif', textAlign: 'center', padding: '20px' }}>
+      <h1>GitHub User Search</h1>
       <Search />
     </div>
   );
-}
+};
 
 export default App;

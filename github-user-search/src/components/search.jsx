@@ -1,36 +1,59 @@
-import React, { useState } from "react";
-import { fetchMyUser } from "../services/githubservices.js";
+import React, { useState } from 'react';
+import { fetchUserData } from '../services/githubServices';
 
 const Search = () => {
-  const [userData, setUserData] = useState(null);
+  const [username, setUsername] = useState('');
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
-  const handleLoadProfile = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!username.trim()) return;
+
     setLoading(true);
-    setUserData(null);
-    setError("");
+    setError('');
+    setUser(null);
 
-    const data = await fetchMyUser();
-    if (data) {
-      setUserData(data);
-    } else {
-      setError("User not found");
+    try {
+      const data = await fetchUserData(username);
+      setUser(data);
+    } catch (err) {
+      setError('Looks like we cant find the user');
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
-    <div>
-      <button onClick={handleLoadProfile}>Load My GitHub Profile</button>
+    <div style={{ textAlign: 'center', marginTop: '20px' }}>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Enter GitHub username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          style={{ padding: '8px', fontSize: '16px' }}
+        />
+        <button type="submit" style={{ padding: '8px 12px', marginLeft: '8px' }}>
+          Search
+        </button>
+      </form>
+
       {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
-      {userData && (
-        <div>
-          <img src={userData.avatar_url} alt={userData.login} width="100" />
-          <p>{userData.name}</p>
-          <a href={userData.html_url} target="_blank" rel="noreferrer">
-            View Profile
+
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+
+      {user && (
+        <div style={{ marginTop: '20px' }}>
+          <img
+            src={user.avatar_url}
+            alt={`${user.login} avatar`}
+            style={{ width: '150px', borderRadius: '50%' }}
+          />
+          <h2>{user.name || user.login}</h2>
+          <a href={user.html_url} target="_blank" rel="noopener noreferrer">
+            View GitHub Profile
           </a>
         </div>
       )}

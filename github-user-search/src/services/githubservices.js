@@ -1,15 +1,20 @@
-// src/services/github.services.js
-import axios from "axios";
+import axios from 'axios';
 
-const BASE_URL = "https://api.github.com/users";
+const BASE_URL = 'https://api.github.com/users/';
 
-// Hardcoded to your username — no parameters
-export const fetchMyUser = async () => {
+/**
+ * Fetch GitHub user data by username
+ * @param {string} username - GitHub username
+ * @returns {Promise<Object>} - User data from GitHub API
+ */
+export const fetchUserData = async (username) => {
   try {
-    const { data } = await axios.get(`${BASE_URL}/Omaonyejiakor93`);
-    return data; // user object
+    const response = await axios.get(`${BASE_URL}${username}`);
+    return response.data;
   } catch (error) {
-    console.error("Error fetching GitHub user:", error);
-    return null;
+    throw new Error('User not found');
   }
 };
+
+// For quick testing with your username
+// fetchUserData('Omaonyejiakor93').then(console.log).catch(console.error);
