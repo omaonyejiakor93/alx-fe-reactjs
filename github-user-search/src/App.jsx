@@ -1,21 +1,30 @@
-import { useState } from "react";
-import Search from "./components/search";   // ✅ correct import
+// src/App.jsx
+import React, { useState } from "react";
+import Search from "./components/search";
 import UserCard from "./components/UserCard";
 import { fetchGithubUser } from "./services/githubService";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [users, setUsers] = useState([]);
 
-  const handleSearch = async (username) => {
-    const data = await fetchGithubUser(username);
-    setUser(data);
+  const handleSearch = async (query, location, minRepos) => {
+    try {
+      const data = await fetchGithubUser(query, location, minRepos);
+      setUsers(data.items || []);
+    } catch (error) {
+      console.error("Error fetching GitHub users:", error);
+    }
   };
 
   return (
-    <div className="p-6 flex flex-col items-center">
+    <div className="min-h-screen bg-gray-100 p-8">
       <h1 className="text-2xl font-bold mb-6">GitHub User Search</h1>
-      <Search onSearch={handleSearch} />   {/* ✅ usage now matches */}
-      {user ? <UserCard user={user} /> : <p>No user data yet.</p>}
+      <Search onSearch={handleSearch} />
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+        {users.map((user) => (
+          <UserCard key={user.id} user={user} />
+        ))}
+      </div>
     </div>
   );
 }
