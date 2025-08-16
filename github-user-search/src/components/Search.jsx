@@ -1,30 +1,41 @@
 import { useState } from "react";
 
-export default function Search({ onSearch }) {
-  const [input, setInput] = useState("");
+function Search({ onSearch }) {
+  const [username, setUsername] = useState("");
+  const [results, setResults] = useState([]);
 
-  const handleSubmit = (e) => {
+  // ✅ async + await
+  const handleSearch = async (e) => {
     e.preventDefault();
-    if (input.trim() !== "") {
-      onSearch(input.trim());
+    if (username) {
+      const data = await onSearch(username);
+      setResults([data]); // put in array so we can use .map
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-2 mb-6">
-      <input
-        type="text"
-        placeholder="Enter GitHub username"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        className="border rounded px-3 py-2"
-      />
-      <button
-        type="submit"
-        className="bg-blue-500 text-white px-4 py-2 rounded"
-      >
-        Search
-      </button>
-    </form>
+    <div className="w-full max-w-md">
+      <form onSubmit={handleSearch} className="flex gap-2 mb-4">
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Enter GitHub username"
+          className="border rounded px-3 py-2 flex-1"
+        />
+        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
+          Search
+        </button>
+      </form>
+
+      {/* ✅ && + map */}
+      {results && results.map((user, index) => (
+        <div key={index} className="p-4 border rounded shadow mb-2">
+          <p>{user?.login}</p>
+        </div>
+      ))}
+    </div>
   );
 }
+
+export default Search;
