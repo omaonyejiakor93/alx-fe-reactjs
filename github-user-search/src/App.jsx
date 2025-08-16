@@ -1,13 +1,23 @@
-import React from 'react';
-import Search from './components/search.jsx';
+import { useState } from "react";
+import Search from "./components/search";   // ✅ correct import
+import UserCard from "./components/UserCard";
+import { fetchGithubUser } from "./services/githubService";
 
-const App = () => {
+function App() {
+  const [user, setUser] = useState(null);
+
+  const handleSearch = async (username) => {
+    const data = await fetchGithubUser(username);
+    setUser(data);
+  };
+
   return (
-    <div style={{ fontFamily: 'Arial, sans-serif', textAlign: 'center', padding: '20px' }}>
-      <h1>GitHub User Search</h1>
-      <Search />
+    <div className="p-6 flex flex-col items-center">
+      <h1 className="text-2xl font-bold mb-6">GitHub User Search</h1>
+      <Search onSearch={handleSearch} />   {/* ✅ usage now matches */}
+      {user ? <UserCard user={user} /> : <p>No user data yet.</p>}
     </div>
   );
-};
+}
 
 export default App;
