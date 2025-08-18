@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Search from "./components/search";   // ✅ Capital S
+import Search from "./components/Search";   // ✅ Capital S
 import UserCard from "./components/UserCard";
 import { fetchGithubUser } from "./services/githubService";
 
