@@ -17,15 +17,16 @@ function RecipeDetail() {
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-6 text-center">{recipe.title}</h1>
       <img src={recipe.image} alt={recipe.title} className="w-full h-64 object-cover rounded-lg mb-4" />
+
       <div className="bg-white p-4 rounded-lg shadow-md">
         <h2 className="text-xl font-semibold mb-2">Summary</h2>
         <p className="text-gray-700 mb-4">{recipe.summary}</p>
 
         <h2 className="text-xl font-semibold mb-2">Ingredients</h2>
         <ul className="list-disc list-inside text-gray-700 mb-4">
-          <li>Ingredient 1</li>
-          <li>Ingredient 2</li>
-          <li>Ingredient 3</li>
+          {recipe.ingredients.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
         </ul>
 
         <h2 className="text-xl font-semibold mb-2">Instructions</h2>

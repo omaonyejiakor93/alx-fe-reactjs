@@ -4,6 +4,13 @@
     "title": "Spaghetti Carbonara",
     "summary": "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
     "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "200g spaghetti",
+      "100g bacon",
+      "2 large eggs",
+      "50g grated Parmesan cheese",
+      "Black pepper"
+    ],
     "instructions": [
       "Boil pasta in salted water.",
       "Fry bacon until crispy.",
@@ -16,6 +23,14 @@
     "title": "Chicken Tikka Masala",
     "summary": "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato based gravy.",
     "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "500g chicken breast",
+      "100g yogurt",
+      "2 tbsp tikka spice mix",
+      "200ml tomato sauce",
+      "50g butter",
+      "50ml cream"
+    ],
     "instructions": [
       "Marinate chicken in yogurt and spices.",
       "Grill chicken until cooked.",
