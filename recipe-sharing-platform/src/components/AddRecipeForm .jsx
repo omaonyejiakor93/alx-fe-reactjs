@@ -10,7 +10,7 @@ function AddRecipeForm() {
     e.preventDefault();
 
     // Validation: Ensure no fields are empty and ingredients have at least 2 items
-    if (!title  !ingredients  !steps) {
+    if (!title ||  !ingredients || !steps) {
       setError('All fields are required.');
       return;
     }
