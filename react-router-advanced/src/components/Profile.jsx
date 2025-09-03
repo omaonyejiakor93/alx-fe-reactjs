@@ -3,15 +3,21 @@ import { Link, Outlet } from "react-router-dom";
 
 function Profile() {
   return (
-    <div>
-      <h2>Profile Page</h2>
-      <nav className="flex gap-4">
-        <Link to="details">Profile Details</Link>
-        <Link to="settings">Profile Settings</Link>
+    <div className="p-6">
+      <h1 className="text-2xl font-bold mb-4">Profile</h1>
+      <nav className="space-x-4">
+        <Link to="details" className="text-blue-500 hover:underline">
+          ProfileDetails
+        </Link>
+        <Link to="settings" className="text-blue-500 hover:underline">
+          ProfileSettings
+        </Link>
       </nav>
 
-      {/* Nested Routes will render here */}
-      <Outlet />
+      {/* Nested routes will render here */}
+      <div className="mt-6">
+        <Outlet />
+      </div>
     </div>
   );
 }
