@@ -1,50 +1,37 @@
-import React, { useState } from "react";
-import { Routes, Route, Link } from "react-router-dom";
-import Home from "./components/Home";
-import Profile from "./components/Profile";
-import ProfileDetails from "./components/ProfileDetails";
-import ProfileSettings from "./components/ProfileSettings";
-import Post from "./components/Post";
+// src/App.jsx
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Profile from "./pages/Profile";
+import ProfileDetails from "./pages/ProfileDetails";
+import ProfileSettings from "./pages/ProfileSettings";
+import BlogPost from "./pages/BlogPost";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
-  // Simulated login state
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  const toggleAuth = () => setIsAuthenticated(!isAuthenticated);
-
   return (
-    <div className="p-4">
-      <nav className="flex gap-4 mb-6">
-        <Link to="/">Home</Link>
-        <Link to="/profile">Profile</Link>
-        <Link to="/posts/1">Post 1</Link>
-        <button onClick={toggleAuth} className="ml-4 border px-2 py-1">
-          {isAuthenticated ? "Logout" : "Login"}
-        </button>
-      </nav>
-
+    <BrowserRouter>
       <Routes>
+        {/* Public route */}
         <Route path="/" element={<Home />} />
 
-        {/* Protected Route */}
+        {/* Protected Profile route with nested routes */}
         <Route
-          path="/profile/*"
+          path="/profile"
           element={
-            <ProtectedRoute isAuthenticated={isAuthenticated}>
+            <ProtectedRoute>
               <Profile />
             </ProtectedRoute>
           }
         >
-          {/* Nested Routes inside Profile */}
           <Route path="details" element={<ProfileDetails />} />
           <Route path="settings" element={<ProfileSettings />} />
         </Route>
 
-        {/* Dynamic Route */}
-        <Route path="/posts/:id" element={<Post />} />
+        {/* Dynamic route */}
+        <Route path="/post/:id" element={<BlogPost />} />
       </Routes>
-    </div>
+    </BrowserRouter>
   );
 }
 
